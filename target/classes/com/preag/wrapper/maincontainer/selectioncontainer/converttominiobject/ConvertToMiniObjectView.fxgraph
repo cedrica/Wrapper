@@ -1,0 +1,19 @@
+package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject
+
+import javafx.scene.layout.VBox
+import com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController
+import javafx.scene.layout.HBox
+import com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectView
+
+dynamic component ConvertToMiniObjectView controlledby ConvertToMiniObjectController styledwith [
+	"/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css" ] 
+	resourcefile "ConvertToMiniObjectView_DE.properties" {
+	ConvertToMiniObjectView id rootNode {
+		VBox id vbPojos{
+			
+		},
+		VBox id vbFieldsAndPreview{
+			
+		}
+	}
+}

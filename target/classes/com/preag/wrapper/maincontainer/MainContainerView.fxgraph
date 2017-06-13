@@ -1,0 +1,53 @@
+package com.preag.wrapper.maincontainer
+
+import javafx.scene.layout.VBox
+import com.preag.wrapper.maincontainer.MainContainerController
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import javafx.scene.control.RadioButton
+import javafx.scene.control.Button
+import com.preag.wrapper.maincontainer.MainContainerView
+
+dynamic component MainContainerView controlledby MainContainerController styledwith [
+	"/com/preag/wrapper/maincontainer/MainContainerView.css" ] resourcefile "MainContainerView_EN.properties" {
+	MainContainerView id rootNode {
+		stylesheets : [
+			"/com/preag/wrapper/maincontainer/MainContainerView.css"
+		],
+		top : VBox {
+			spacing : 10,
+			HBox {
+				spacing : 20,
+				static vgrow : "ALWAYS",
+				alignment : "CENTER",
+				RadioButton id rbChangeToInterface {
+					text : "In Interface umwandlen",
+					onAction  : controllermethod onChangeToInterface
+				},
+				RadioButton id rbChangeToMiniObject {
+					text : "In Interface umwandlen",
+					onAction : controllermethod onChangeToMiniObject
+				}
+			},
+			HBox {
+				Button {
+					text : rstring "choosepojos",
+				onAction  : controllermethod onChoosePojos
+				}
+			}
+		},
+		center : HBox id hbPlaceHolder {
+
+		},
+		bottom : HBox {
+			Button {
+				text : "Speichern",
+				onAction : controllermethod onSave
+			},
+			Button {
+				text : "Schliessen",
+				onAction : controllermethod onClose
+			}
+		}
+	}
+}

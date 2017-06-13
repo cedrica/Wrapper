@@ -1,0 +1,16 @@
+package com.preag.wrapper.maincontainer.selectioncontainer.converttointerface
+
+import javafx.scene.layout.VBox
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.HBox
+import javafx.scene.control.Button
+import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceController
+import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceView
+
+dynamic component ConvertToInterfaceView controlledby ConvertToInterfaceController 
+styledwith["/com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/ConvertToInterfaceView.css"] 
+resourcefile "ConvertToInterfaceView_EN.properties"{
+	ConvertToInterfaceView id rootNode {
+
+	}
+}
