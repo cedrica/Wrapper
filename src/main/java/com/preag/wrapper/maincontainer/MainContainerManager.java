@@ -47,6 +47,7 @@ public class MainContainerManager {
 			error.showAndWait();
 			return;
 		}
+		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
