@@ -14,9 +14,22 @@
 <fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToMiniObjectView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController" fillHeight="true" HBox.hgrow="ALWAYS">
 
 	<ScrollPane fitToHeight="true" fitToWidth="true" ConvertToMiniObjectView.hgrow="ALWAYS"> 
-		<HBox style="-fx-background-color:#fff" fillHeight="true"> 
-			<VBox fx:id="vbPojos" spacing="10"/> 
+		<HBox fillHeight="true"> 
+			<VBox fx:id="vbPojos" spacing="10"> 
+				<styleClass>
+					<String fx:value="vb-pojos" />
+				</styleClass>
+			</VBox>
 			<HBox fx:id="hbGridPaneContainer"/> 
+			<styleClass>
+				<String fx:value="hb-pojos-preview" />
+			</styleClass>
 		</HBox>
 	</ScrollPane>
+	<stylesheets>
+		<String fx:value="/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css" />
+	</stylesheets>
+	<styleClass>
+		<String fx:value="convert-to-mini-object-view" />
+	</styleClass>
 </fx:root>

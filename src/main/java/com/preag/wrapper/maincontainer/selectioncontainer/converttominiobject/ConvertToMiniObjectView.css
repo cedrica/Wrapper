@@ -1,0 +1,17 @@
+.convert-to-mini-object-view{
+	
+}
+.convert-to-mini-object-view .vb-pojos{
+	-fx-background-color:gray;
+}
+
+.radio-button:selected{
+	-fx-text-fill:#fff;
+}
+.convert-to-mini-object-view .vb-pojos .radio-button .text{
+	-fx-text-fill:#fff;
+}
+
+.convert-to-mini-object-view .scroll-pane .hb-pojos-preview{
+	-fx-background-color:#fff
+}

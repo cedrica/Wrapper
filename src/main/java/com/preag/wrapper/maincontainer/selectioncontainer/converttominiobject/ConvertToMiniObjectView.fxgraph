@@ -11,6 +11,8 @@ dynamic component ConvertToMiniObjectView controlledby ConvertToMiniObjectContro
 	"/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css" ] resourcefile
 "/bundle/wrapper_de_DE.properties" {
 	ConvertToMiniObjectView id rootNode {
+		stylesheets : ["/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css"],
+		styleClass : ["convert-to-mini-object-view"],
 		call HBox#hgrow : "ALWAYS",
 
 		fillHeight : true,
@@ -21,9 +23,10 @@ dynamic component ConvertToMiniObjectView controlledby ConvertToMiniObjectContro
 
 			static hgrow : "ALWAYS",
 			HBox {
-				style : "-fx-background-color:#fff",
+				styleClass : ["hb-pojos-preview"],
 				fillHeight : true,
 				VBox id vbPojos {
+					styleClass : ["vb-pojos"],
 					spacing : 10
 				},
 				HBox id hbGridPaneContainer {

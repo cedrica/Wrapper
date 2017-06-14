@@ -1,6 +1,5 @@
 package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
@@ -9,8 +8,6 @@ import java.net.URLClassLoader;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.io.FileUtils;
 
 import com.preag.core.ui.utils.dialog.Dialogs;
 
@@ -69,9 +66,17 @@ public class ConvertToMiniObjectController implements Initializable {
 					initFieldsAndPreviewForClass(clazz);
 				}
 				rbPojo.setToggleGroup(group);
-				vbPojos.getChildren().add(rbPojo);
+				HBox hbField = new HBox(rbPojo);
+				hbField.setFillHeight(true);
+				vbPojos.getChildren().add(hbField);
 				rbPojo.selectedProperty().addListener((obs, oldVal, newVal) -> {
-					initFieldsAndPreviewForClass(clazz);
+					if(newVal){
+						hbField.setStyle("-fx-background-color:#fff");
+						initFieldsAndPreviewForClass(clazz);	
+					}else{
+						hbField.setStyle("-fx-background-color:gray");
+					}
+					
 				});
 			} catch (ClassNotFoundException | MalformedURLException e) {
 				Dialog<ButtonType> error = Dialogs.error(
@@ -101,6 +106,7 @@ public class ConvertToMiniObjectController implements Initializable {
 			Class<?> type = field.getType();
 			Label label = new Label("--");
 			CheckBox cbField = new CheckBox(field.getName() + " (" + type.getName() + ")");
+			
 			HBox preview = new HBox(label);
 			cbField.selectedProperty().addListener((obs, oldVal, newVal) -> {
 				if (newVal) {
@@ -128,13 +134,12 @@ public class ConvertToMiniObjectController implements Initializable {
 					label.setText("--");
 				}
 			});
-
 			gridPane.add(cbField, columnIndex, rowIndex);
 			gridPane.add(preview, columnIndex + 1, rowIndex);
 			rowIndex++;
-			hbGridPaneContainer.getChildren().clear();
-			hbGridPaneContainer.getChildren().add(gridPane);
 		}
+		hbGridPaneContainer.getChildren().clear();
+		hbGridPaneContainer.getChildren().add(gridPane);
 	}
 
 	private String retrieveType(Type genericType) {

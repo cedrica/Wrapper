@@ -1,0 +1,39 @@
+package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject
+
+import javafx.scene.layout.VBox
+import com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController
+import javafx.scene.layout.HBox
+import com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectView
+import javafx.scene.layout.GridPane
+import javafx.scene.control.ScrollPane
+
+dynamic component ConvertToMiniObjectView controlledby ConvertToMiniObjectController styledwith [
+	"/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css" ] resourcefile
+"/bundle/wrapper_de_DE.properties" {
+	ConvertToMiniObjectView id rootNode {
+		stylesheets : ["/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css"],
+		styleClass : ["convert-to-mini-object-view"],
+		call HBox#hgrow : "ALWAYS",
+
+		fillHeight : true,
+
+		ScrollPane {
+			fitToHeight : true,
+			fitToWidth : true,
+
+			static hgrow : "ALWAYS",
+			HBox {
+				styleClass : ["hb-pojos-preview"],
+				fillHeight : true,
+				VBox id vbPojos {
+					styleClass : ["vb-pojos"],
+					spacing : 10
+				},
+				HBox id hbGridPaneContainer {
+				}
+			}
+
+		}
+
+	}
+}
