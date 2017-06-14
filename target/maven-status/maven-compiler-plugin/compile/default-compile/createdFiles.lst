@@ -1,0 +1,15 @@
+com\preag\wrapper\event\WrapperEvent.class
+com\preag\wrapper\maincontainer\MainContainerController.class
+com\preag\wrapper\maincontainer\previews\PreviewController.class
+com\preag\wrapper\maincontainer\selectioncontainer\SelectionContainerManager.class
+com\preag\wrapper\maincontainer\previews\PreviewView.class
+com\preag\wrapper\localization\Localization.class
+com\preag\wrapper\maincontainer\selectioncontainer\converttointerface\ConvertToInterfaceView.class
+application\Main.class
+com\preag\wrapper\Main.class
+com\preag\wrapper\maincontainer\selectioncontainer\converttominiobject\ConvertToMiniObjectController.class
+com\preag\wrapper\helper\Helper.class
+com\preag\wrapper\maincontainer\MainContainerManager.class
+com\preag\wrapper\maincontainer\MainContainerView.class
+com\preag\wrapper\maincontainer\selectioncontainer\converttointerface\ConvertToInterfaceController.class
+com\preag\wrapper\maincontainer\selectioncontainer\converttominiobject\ConvertToMiniObjectView.class

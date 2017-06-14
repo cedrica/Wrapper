@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.preag.wrapper.event.WrapperEvent;
-import com.preag.wrapper.helper.Helper;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,7 +65,6 @@ public class MainContainerController implements Initializable{
 	@FXML public void onChoosePojos() {
 		FileChooser fileChooser = new FileChooser();
 		List<File> pojosFiles = fileChooser.showOpenMultipleDialog(rootNode.getScene().getWindow());
-		Helper.savePojosLocaly(pojosFiles);
 		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHOOSE_POJOS,pojosFiles));
 	}
 

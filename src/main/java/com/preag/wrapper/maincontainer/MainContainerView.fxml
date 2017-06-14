@@ -10,7 +10,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?scenebuilder-preview-i18n-resource MainContainerView_EN.properties?>
+<?scenebuilder-preview-i18n-resource /bundle/wrapper_de_DE.properties?>
 <?scenebuilder-stylesheet /com/preag/wrapper/maincontainer/MainContainerView.css?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="MainContainerView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.MainContainerController">
@@ -37,8 +37,8 @@
 	</center>
 	<bottom>
 		<HBox spacing="10"> 
-			<Button text="Speichern" onAction="#onSave"/> 
-			<Button text="Schliessen" onAction="#onClose"/> 
+			<Button text="%button.save" onAction="#onSave"/> 
+			<Button text="%button.close" onAction="#onClose"/> 
 			<padding>
 				<Insets top="10" bottom="10"/> 
 			</padding>

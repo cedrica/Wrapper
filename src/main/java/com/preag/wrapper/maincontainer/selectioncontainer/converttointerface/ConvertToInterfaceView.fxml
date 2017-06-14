@@ -5,7 +5,7 @@
 
 <?import java.lang.*?>
 <?import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceView?>
-<?scenebuilder-preview-i18n-resource ConvertToInterfaceView_EN.properties?>
+<?scenebuilder-preview-i18n-resource /bundle/wrapper_de_DE.properties?>
 <?scenebuilder-stylesheet /com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/ConvertToInterfaceView.css?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToInterfaceView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceController">

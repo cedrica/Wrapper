@@ -9,7 +9,7 @@ import javafx.scene.control.ScrollPane
 
 dynamic component ConvertToMiniObjectView controlledby ConvertToMiniObjectController styledwith [
 	"/com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css" ] resourcefile
-"ConvertToMiniObjectView_DE.properties" {
+"/bundle/wrapper_de_DE.properties" {
 	ConvertToMiniObjectView id rootNode {
 		call HBox#hgrow : "ALWAYS",
 

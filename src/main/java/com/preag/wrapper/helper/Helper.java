@@ -103,13 +103,12 @@ public class Helper {
 		vbBox.setClip(clip);
 		vbBox.setAlignment(Pos.CENTER);
 	}
-	public static void savePojosLocaly(List<File> pojosFiles) {
-		
+	public static void savePojosLocaly(List<File> pojosFiles, String destinationPath) {
+		if(pojosFiles ==  null || pojosFiles.isEmpty())
+			return;
 		for (File file : pojosFiles) {
 			try {
-				String path = System.getProperty("user.dir") +  "/src/main/java/com/preag/wrapper/temp" ;
-				path = path.replace("\\", "/");
-				File destDir = new File(path);
+				File destDir = new File(destinationPath);
 				FileUtils.copyFileToDirectory(file, destDir);
 			} catch (IOException e) {
 				e.printStackTrace();

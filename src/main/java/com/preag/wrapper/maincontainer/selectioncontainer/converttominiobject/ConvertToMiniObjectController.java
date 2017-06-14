@@ -1,11 +1,16 @@
 package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.FileUtils;
 
 import com.preag.core.ui.utils.dialog.Dialogs;
 
@@ -31,18 +36,33 @@ public class ConvertToMiniObjectController implements Initializable {
 	VBox vbPojos;
 	@FXML
 	HBox hbGridPaneContainer;
+	private String jarFilePath;
+	private String packageName;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		rootNode.packageNameProperty().addListener((obs, oldVal, newVal) -> setPackageName(newVal));
 		rootNode.pojosProperty().addListener((obs, oldVal, newVal) -> insertIntoGrid(newVal));
+		rootNode.jarFilePathProperty().addListener((obs, oldVal, newVal) -> setJarFilePath(newVal));
+	}
+
+	private void setPackageName(String newVal) {
+		packageName = newVal;
+	}
+
+	private void setJarFilePath(String newVal) {
+		jarFilePath = newVal;
 	}
 
 	private void insertIntoGrid(ObservableList<String> pojosNames) {
 		boolean first = true;
+		jarFilePath = "file:///" + jarFilePath.replace("\\", "/");
 		for (String className : pojosNames) {
 			try {
+				URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] { new URL(jarFilePath) });
+				Class<?> clazz = classLoader
+						.loadClass(packageName+"." + retrieveName(className));
 				RadioButton rbPojo = new RadioButton(className);
-				Class<?> clazz = Class.forName("com.preag.wrapper.temp." + retrieveName(className));
 				if (first) {
 					first = false;
 					rbPojo.setSelected(true);
@@ -53,10 +73,12 @@ public class ConvertToMiniObjectController implements Initializable {
 				rbPojo.selectedProperty().addListener((obs, oldVal, newVal) -> {
 					initFieldsAndPreviewForClass(clazz);
 				});
-			} catch (ClassNotFoundException e) {
-				Dialog<ButtonType> error = Dialogs.error("Das PoJo " + className + " enth‰lt Abh‰ngigkeiten die auch mitimportiert werden sollen",
+			} catch (ClassNotFoundException | MalformedURLException e) {
+				Dialog<ButtonType> error = Dialogs.error(
+						"Das PoJo " + className + " enth√§lt Abh√§ngigkeiten die auch mitimportiert werden sollen",
 						rootNode.getScene().getWindow());
 				error.showAndWait();
+				e.printStackTrace();
 			}
 		}
 	}
@@ -107,8 +129,9 @@ public class ConvertToMiniObjectController implements Initializable {
 				}
 			});
 
-			gridPane.add(cbField, columnIndex, rowIndex++);
-			gridPane.add(preview, columnIndex + 1, rowIndex++);
+			gridPane.add(cbField, columnIndex, rowIndex);
+			gridPane.add(preview, columnIndex + 1, rowIndex);
+			rowIndex++;
 			hbGridPaneContainer.getChildren().clear();
 			hbGridPaneContainer.getChildren().add(gridPane);
 		}

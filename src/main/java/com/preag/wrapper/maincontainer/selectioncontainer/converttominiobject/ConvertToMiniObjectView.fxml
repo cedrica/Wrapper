@@ -8,7 +8,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?scenebuilder-preview-i18n-resource ConvertToMiniObjectView_DE.properties?>
+<?scenebuilder-preview-i18n-resource /bundle/wrapper_de_DE.properties?>
 <?scenebuilder-stylesheet /com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToMiniObjectView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController" fillHeight="true" HBox.hgrow="ALWAYS">
