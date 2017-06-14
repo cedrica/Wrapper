@@ -5,12 +5,18 @@
 
 <?import java.lang.*?>
 <?import com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?scenebuilder-preview-i18n-resource ConvertToMiniObjectView_DE.properties?>
 <?scenebuilder-stylesheet /com/preag/wrapper/maincontainer/selectioncontainer/converttominiobject/ConvertToMiniObjectView.css?>
 
-<fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToMiniObjectView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToMiniObjectView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject.ConvertToMiniObjectController" fillHeight="true" HBox.hgrow="ALWAYS">
 
-	<VBox fx:id="vbPojos"/> 
-	<VBox fx:id="vbFieldsAndPreview"/> 
+	<ScrollPane fitToHeight="true" fitToWidth="true" ConvertToMiniObjectView.hgrow="ALWAYS"> 
+		<HBox style="-fx-background-color:#fff" fillHeight="true"> 
+			<VBox fx:id="vbPojos" spacing="10"/> 
+			<HBox fx:id="hbGridPaneContainer"/> 
+		</HBox>
+	</ScrollPane>
 </fx:root>

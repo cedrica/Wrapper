@@ -5,6 +5,7 @@
 
 <?import java.lang.*?>
 <?import com.preag.wrapper.maincontainer.MainContainerView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.HBox?>
@@ -26,15 +27,21 @@
 			<HBox> 
 				<Button text="%choosepojos" onAction="#onChoosePojos"/> 
 			</HBox>
+			<padding>
+				<Insets bottom="10"/> 
+			</padding>
 		</VBox>
 	</top>
 	<center>
 		<HBox fx:id="hbPlaceHolder"/> 
 	</center>
 	<bottom>
-		<HBox> 
+		<HBox spacing="10"> 
 			<Button text="Speichern" onAction="#onSave"/> 
 			<Button text="Schliessen" onAction="#onClose"/> 
+			<padding>
+				<Insets top="10" bottom="10"/> 
+			</padding>
 		</HBox>
 	</bottom>
 </fx:root>

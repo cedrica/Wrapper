@@ -37,6 +37,22 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.zenjava</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.preag.wrapper.Main</mainClass>
+					<jfxMainAppJarName>Wrapper.jar</jfxMainAppJarName>
+					<vendor>Project Real Estate AG</vendor>
+					<bundler>EXE</bundler>
+					<nativeReleaseVersion>${project.version}</nativeReleaseVersion>
+					<needShortcut>true</needShortcut>
+					<needMenu>true</needMenu>
+					<appName>Wrapper</appName>
+					<additionalAppResources>pojos_temp/</additionalAppResources>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

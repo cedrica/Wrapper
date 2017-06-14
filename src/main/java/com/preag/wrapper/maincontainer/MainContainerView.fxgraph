@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox
 import javafx.scene.control.RadioButton
 import javafx.scene.control.Button
 import com.preag.wrapper.maincontainer.MainContainerView
+import javafx.geometry.Insets
 
 dynamic component MainContainerView controlledby MainContainerController styledwith [
 	"/com/preag/wrapper/maincontainer/MainContainerView.css" ] resourcefile "MainContainerView_EN.properties" {
@@ -16,6 +17,9 @@ dynamic component MainContainerView controlledby MainContainerController styledw
 		],
 		top : VBox {
 			spacing : 10,
+			padding : Insets{
+				bottom : 10
+			},
 			HBox {
 				spacing : 20,
 				static vgrow : "ALWAYS",
@@ -40,6 +44,11 @@ dynamic component MainContainerView controlledby MainContainerController styledw
 
 		},
 		bottom : HBox {
+			spacing : 10,
+			padding : Insets{
+				top : 10,
+				bottom : 10
+			},
 			Button {
 				text : "Speichern",
 				onAction : controllermethod onSave
