@@ -130,6 +130,7 @@ public class ConvertToMiniObjectController implements Initializable {
 			}
 		} else {
 			label.setText("--");
+			rootNode.getHashFieldAndProperties().remove(field.getName());
 		}
 	}
 
