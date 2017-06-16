@@ -1,15 +1,13 @@
 package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.preag.core.ui.utils.dialog.Dialogs;
+import com.preag.wrapper.helper.Helper;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,51 +31,33 @@ public class ConvertToMiniObjectController implements Initializable {
 	VBox vbPojos;
 	@FXML
 	HBox hbGridPaneContainer;
-	private String jarFilePath;
-	private String packageName;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		rootNode.packageNameProperty().addListener((obs, oldVal, newVal) -> setPackageName(newVal));
 		rootNode.pojosProperty().addListener((obs, oldVal, newVal) -> insertIntoGrid(newVal));
-		rootNode.jarFilePathProperty().addListener((obs, oldVal, newVal) -> setJarFilePath(newVal));
-	}
-
-	private void setPackageName(String newVal) {
-		packageName = newVal;
-	}
-
-	private void setJarFilePath(String newVal) {
-		jarFilePath = newVal;
 	}
 
 	private void insertIntoGrid(ObservableList<String> pojosNames) {
 		boolean first = true;
-		jarFilePath = "file:///" + jarFilePath.replace("\\", "/");
+		String jarFilePath = "file:///" + rootNode.getJarFilePath().replace("\\", "/");
 		for (String className : pojosNames) {
 			try {
 				URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] { new URL(jarFilePath) });
 				Class<?> clazz = classLoader
-						.loadClass(packageName+"." + retrieveName(className));
+						.loadClass(rootNode.getPackageName() + "." + Helper.removeFileExtension(className));
 				RadioButton rbPojo = new RadioButton(className);
 				if (first) {
 					first = false;
 					rbPojo.setSelected(true);
 					initFieldsAndPreviewForClass(clazz);
+					rootNode.setCurrentSelectedPojo(Helper.removeFileExtension(className));
 				}
 				rbPojo.setToggleGroup(group);
 				HBox hbField = new HBox(rbPojo);
 				hbField.setFillHeight(true);
 				vbPojos.getChildren().add(hbField);
-				rbPojo.selectedProperty().addListener((obs, oldVal, newVal) -> {
-					if(newVal){
-						hbField.setStyle("-fx-background-color:#fff");
-						initFieldsAndPreviewForClass(clazz);	
-					}else{
-						hbField.setStyle("-fx-background-color:gray");
-					}
-					
-				});
+				rbPojo.selectedProperty().addListener(
+						(obs, oldVal, newVal) -> initFieldAndSwitchBackgroundForSelectedPojo(clazz, hbField, newVal,className));
 			} catch (ClassNotFoundException | MalformedURLException e) {
 				Dialog<ButtonType> error = Dialogs.error(
 						"Das PoJo " + className + " enthält Abhängigkeiten die auch mitimportiert werden sollen",
@@ -88,12 +68,13 @@ public class ConvertToMiniObjectController implements Initializable {
 		}
 	}
 
-	private String retrieveName(String className) {
-		if (className.trim().isEmpty())
-			return "";
-		else {
-			String[] split = className.split("\\.");
-			return split[0];
+	private void initFieldAndSwitchBackgroundForSelectedPojo(Class<?> clazz, HBox hbField, Boolean newVal,String className) {
+		if (newVal) {
+			rootNode.setCurrentSelectedPojo(Helper.removeFileExtension(className));
+			hbField.setStyle("-fx-background-color:#fff");
+			initFieldsAndPreviewForClass(clazz);
+		} else {
+			hbField.setStyle("-fx-background-color:gray");
 		}
 	}
 
@@ -106,34 +87,9 @@ public class ConvertToMiniObjectController implements Initializable {
 			Class<?> type = field.getType();
 			Label label = new Label("--");
 			CheckBox cbField = new CheckBox(field.getName() + " (" + type.getName() + ")");
-			
 			HBox preview = new HBox(label);
-			cbField.selectedProperty().addListener((obs, oldVal, newVal) -> {
-				if (newVal) {
-					if (type.getName().toLowerCase().equals("long")) {
-						label.setText("LongProperty " + field.getName() + " = new SimpleLongProperty()");
-					} else if (type.getName().toLowerCase().equals("int")) {
-						label.setText("IntegerProperty " + field.getName() + " = new SimpleIntegerProperty()");
-					} else if (type.getName().toLowerCase().equals("string")
-							|| type.getName().toLowerCase().equals("textfield")
-							|| type.getName().toLowerCase().equals("textarea")) {
-						label.setText("StringProperty " + field.getName() + " = new SimpleStringProperty()");
-					} else if (type.getName().toLowerCase().equals("double")) {
-						label.setText("DoubleProperty " + field.getName() + " = new SimpleDoubleProperty()");
-					} else if (type.getName().toLowerCase().equals("float")) {
-						label.setText("FloatProperty " + field.getName() + " = new SimpleFloatProperty()");
-					} else if (type.getName().toLowerCase().equals("boolean")
-							|| type.getName().toLowerCase().equals("checkbox")
-							|| type.getName().toLowerCase().equals("radiobutton")) {
-						label.setText("BooleanProperty " + field.getName() + " = new SimpleBooleanProperty()");
-					} else {
-						label.setText("ObjectProperty<" + retrieveType(field.getGenericType()) + "> " + field.getName()
-								+ " = new SimpleObjectProperty<>()");
-					}
-				} else {
-					label.setText("--");
-				}
-			});
+			cbField.selectedProperty()
+					.addListener((obs, oldVal, newVal) -> showPropertyForSelectedField(field, type, label, newVal));
 			gridPane.add(cbField, columnIndex, rowIndex);
 			gridPane.add(preview, columnIndex + 1, rowIndex);
 			rowIndex++;
@@ -142,15 +98,38 @@ public class ConvertToMiniObjectController implements Initializable {
 		hbGridPaneContainer.getChildren().add(gridPane);
 	}
 
-	private String retrieveType(Type genericType) {
-		Pattern pattern = Pattern.compile("<(.*?)>");
-		Matcher matcher = pattern.matcher(genericType.getTypeName());
-		if (matcher.find()) {
-			String[] split = matcher.group(1).split("\\.");
-			return (split != null && split.length > 0) ? split[split.length - 1] : matcher.group(1);
+	private void showPropertyForSelectedField(Field field, Class<?> type, Label label, Boolean newVal) {
+		if (newVal) {
+			if (type.getName().toLowerCase().equals("long")) {
+				label.setText("LongProperty " + field.getName() + " = new SimpleLongProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "LongProperty " + field.getName() + " = new SimpleLongProperty()");
+			} else if (type.getName().toLowerCase().equals("int")) {
+				label.setText("IntegerProperty " + field.getName() + " = new SimpleIntegerProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "IntegerProperty " + field.getName() + " = new SimpleIntegerProperty()");
+			} else if (type.getName().toLowerCase().equals("string")
+					|| type.getName().toLowerCase().equals("textfield")
+					|| type.getName().toLowerCase().equals("textarea")) {
+				label.setText("StringProperty " + field.getName() + " = new SimpleStringProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "StringProperty " + field.getName() + " = new SimpleStringProperty()");
+			} else if (type.getName().toLowerCase().equals("double")) {
+				label.setText("DoubleProperty " + field.getName() + " = new SimpleDoubleProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "DoubleProperty " + field.getName() + " = new SimpleDoubleProperty()");
+			} else if (type.getName().toLowerCase().equals("float")) {
+				label.setText("FloatProperty " + field.getName() + " = new SimpleFloatProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(),"FloatProperty " + field.getName() + " = new SimpleFloatProperty()");
+			} else if (type.getName().toLowerCase().equals("boolean")
+					|| type.getName().toLowerCase().equals("checkbox")
+					|| type.getName().toLowerCase().equals("radiobutton")) {
+				label.setText("BooleanProperty " + field.getName() + " = new SimpleBooleanProperty()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "BooleanProperty " + field.getName() + " = new SimpleBooleanProperty()");
+			} else {
+				label.setText("ObjectProperty<" + Helper.retrieveType(field.getGenericType()) + "> " + field.getName()
+						+ " = new SimpleObjectProperty<>()");
+				rootNode.getHashFieldAndProperties().put(field.getName(), "ObjectProperty<" + Helper.retrieveType(field.getGenericType()) + "> " + field.getName()
+				+ " = new SimpleObjectProperty<>()");
+			}
 		} else {
-			String[] split = genericType.getTypeName().split("\\.");
-			return (split != null && split.length > 0) ? split[split.length - 1] : null;
+			label.setText("--");
 		}
 	}
 

@@ -1,5 +1,7 @@
 package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject;
 
+import java.util.HashMap;
+
 import com.preag.core.ui.service.FXMLService;
 import com.preag.wrapper.localization.Localization;
 
@@ -14,6 +16,8 @@ public class ConvertToMiniObjectView extends HBox {
 	private ObjectProperty<ObservableList<String>> pojos = new SimpleObjectProperty<>();
 	private StringProperty jarFilePath = new SimpleStringProperty();
 	private StringProperty packageName = new SimpleStringProperty();
+	private ObjectProperty<HashMap<String, String>> hashFieldAndProperties = new SimpleObjectProperty<>(new HashMap<>());
+	private StringProperty currentSelectedPojo = new SimpleStringProperty();
 
 	public ConvertToMiniObjectView() {
 		FXMLService.INSTANCE.loadView(this, Localization.getDefault());
@@ -53,6 +57,30 @@ public class ConvertToMiniObjectView extends HBox {
 
 	public final void setPackageName(final String packageName) {
 		this.packageNameProperty().set(packageName);
+	}
+
+	public final ObjectProperty<HashMap<String, String>> hashFieldAndPropertiesProperty() {
+		return this.hashFieldAndProperties;
+	}
+
+	public final HashMap<String, String> getHashFieldAndProperties() {
+		return this.hashFieldAndPropertiesProperty().get();
+	}
+
+	public final void setHashFieldAndProperties(final HashMap<String, String> hashFieldAndProperties) {
+		this.hashFieldAndPropertiesProperty().set(hashFieldAndProperties);
+	}
+
+	public final StringProperty currentSelectedPojoProperty() {
+		return this.currentSelectedPojo;
+	}
+
+	public final String getCurrentSelectedPojo() {
+		return this.currentSelectedPojoProperty().get();
+	}
+
+	public final void setCurrentSelectedPojo(final String currentSelectedPojo) {
+		this.currentSelectedPojoProperty().set(currentSelectedPojo);
 	}
 
 }

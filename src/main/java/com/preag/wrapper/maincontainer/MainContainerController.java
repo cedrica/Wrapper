@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.preag.wrapper.enums.Category;
 import com.preag.wrapper.event.WrapperEvent;
 
 import javafx.fxml.FXML;
@@ -58,9 +59,9 @@ public class MainContainerController implements Initializable{
 		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHANGE_TO_MINI_OBJECT));
 	}
 
-	@FXML public void onClose() {}
-
-	@FXML public void onSave() {}
+	@FXML public void onSave() {
+		rootNode.fireEvent(new WrapperEvent(WrapperEvent.SAVE,Category.MINI_OBJECT));
+	}
 
 	@FXML public void onChoosePojos() {
 		FileChooser fileChooser = new FileChooser();

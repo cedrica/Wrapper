@@ -22,7 +22,7 @@
 		<VBox spacing="10"> 
 			<HBox spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS"> 
 				<RadioButton fx:id="rbChangeToInterface" text="In Interface umwandlen" onAction="#onChangeToInterface"/> 
-				<RadioButton fx:id="rbChangeToMiniObject" text="In Interface umwandlen" onAction="#onChangeToMiniObject"/> 
+				<RadioButton fx:id="rbChangeToMiniObject" text="In Mini Object umwandlen" onAction="#onChangeToMiniObject"/> 
 			</HBox>
 			<HBox> 
 				<Button text="%choosepojos" onAction="#onChoosePojos"/> 
@@ -37,8 +37,8 @@
 	</center>
 	<bottom>
 		<HBox spacing="10"> 
+			<HBox HBox.hgrow="ALWAYS"/> 
 			<Button text="%button.save" onAction="#onSave"/> 
-			<Button text="%button.close" onAction="#onClose"/> 
 			<padding>
 				<Insets top="10" bottom="10"/> 
 			</padding>
