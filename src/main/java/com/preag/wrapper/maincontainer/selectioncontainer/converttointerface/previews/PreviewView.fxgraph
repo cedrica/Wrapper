@@ -1,0 +1,14 @@
+package com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.previews
+
+import javafx.scene.layout.VBox
+import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.previews.PreviewController
+import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.previews.PreviewView
+import javafx.scene.layout.HBox
+
+dynamic component PreviewView controlledby PreviewController styledwith["/com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/previews/PreviewView.css"]{
+	PreviewView id rootNode {
+		stylesheets : ["/com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/previews/PreviewView.css"],
+		styleClass : ["preview"],
+		call HBox#hgrow : "ALWAYS"
+	}
+}

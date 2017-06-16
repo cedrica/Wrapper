@@ -18,6 +18,7 @@ public class WrapperEvent extends ApplicationEvent {
 	public static final EventType<WrapperEvent> CHANGE_TO_MINI_OBJECT = new EventType<>(ANY, "CHANGE_TO_MINI_OBJECT");
 	public static final EventType<WrapperEvent> CHOOSE_POJOS =  new EventType<>(ANY, "CHOOSE_POJOS");
 	public static final EventType<WrapperEvent> SAVE =  new EventType<>(ANY, "SAVE");
+	public static final EventType<WrapperEvent> SHOW_PREVIEW =  new EventType<>(ANY, "SHOW_PREVIEW");
 	private List<File> pojos;
 	private Category category;
 

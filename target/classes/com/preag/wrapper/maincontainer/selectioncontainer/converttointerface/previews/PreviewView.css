@@ -1,0 +1,6 @@
+.preview{
+	-fx-background-color:#fff
+}
+.preview > .label{
+	-fx-text-fill:#333
+}

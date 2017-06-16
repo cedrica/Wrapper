@@ -2,6 +2,8 @@ package com.preag.wrapper.maincontainer.selectioncontainer.converttominiobject;
 
 import java.util.HashMap;
 
+import javax.inject.Singleton;
+
 import com.preag.core.ui.service.FXMLService;
 import com.preag.wrapper.localization.Localization;
 
@@ -12,6 +14,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.HBox;
 
+@Singleton
 public class ConvertToMiniObjectView extends HBox {
 	private ObjectProperty<ObservableList<String>> pojos = new SimpleObjectProperty<>();
 	private StringProperty jarFilePath = new SimpleStringProperty();

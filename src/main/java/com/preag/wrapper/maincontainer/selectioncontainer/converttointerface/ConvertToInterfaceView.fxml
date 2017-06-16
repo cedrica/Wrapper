@@ -5,9 +5,24 @@
 
 <?import java.lang.*?>
 <?import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceView?>
+<?import com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.previews.PreviewView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?scenebuilder-preview-i18n-resource /bundle/wrapper_de_DE.properties?>
 <?scenebuilder-stylesheet /com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/ConvertToInterfaceView.css?>
 
-<fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToInterfaceView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceController">
+<fx:root xmlns:fx="http://javafx.com/fxml" type="ConvertToInterfaceView" fx:id="rootNode" fx:controller="com.preag.wrapper.maincontainer.selectioncontainer.converttointerface.ConvertToInterfaceController" fillHeight="true" HBox.hgrow="ALWAYS">
 
+	<ScrollPane fitToHeight="true" fitToWidth="true" ConvertToInterfaceView.hgrow="ALWAYS"> 
+		<content>
+			<HBox> 
+				<GridPane fx:id="gridPane" hgap="20" HBox.hgrow="ALWAYS"/> 
+				<PreviewView fx:id="previewView" HBox.hgrow="ALWAYS"/> 
+			</HBox>
+		</content>
+	</ScrollPane>
+	<stylesheets>
+		<String fx:value="/com/preag/wrapper/maincontainer/selectioncontainer/converttointerface/ConvertToInterfaceView.css" />
+	</stylesheets>
 </fx:root>

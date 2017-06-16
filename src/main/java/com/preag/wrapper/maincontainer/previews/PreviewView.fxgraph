@@ -1,9 +1,0 @@
-package com.preag.wrapper.maincontainer.previews
-
-import javafx.scene.layout.VBox
-
-component PreviewView {
-	VBox {
-		//TODO Add Nodes
-	}
-}
