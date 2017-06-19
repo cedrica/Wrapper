@@ -86,7 +86,7 @@ public class ConvertToMiniObjectController implements Initializable {
 		for (Field field : declaredFields) {
 			Class<?> type = field.getType();
 			Label label = new Label("--");
-			CheckBox cbField = new CheckBox(field.getName() + " (" + type.getName() + ")");
+			CheckBox cbField = new CheckBox(field.getName() + " (" + type.getSimpleName() + ")");
 			HBox preview = new HBox(label);
 			cbField.selectedProperty()
 					.addListener((obs, oldVal, newVal) -> showPropertyForSelectedField(field, type, label, newVal));
@@ -100,26 +100,26 @@ public class ConvertToMiniObjectController implements Initializable {
 
 	private void showPropertyForSelectedField(Field field, Class<?> type, Label label, Boolean newVal) {
 		if (newVal) {
-			if (type.getName().toLowerCase().equals("long")) {
+			if (type.getSimpleName().toLowerCase().equals("long")) {
 				label.setText("LongProperty " + field.getName() + " = new SimpleLongProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(), "LongProperty " + field.getName() + " = new SimpleLongProperty()");
-			} else if (type.getName().toLowerCase().equals("int")) {
+			} else if (type.getSimpleName().toLowerCase().equals("int")) {
 				label.setText("IntegerProperty " + field.getName() + " = new SimpleIntegerProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(), "IntegerProperty " + field.getName() + " = new SimpleIntegerProperty()");
-			} else if (type.getName().toLowerCase().equals("string")
-					|| type.getName().toLowerCase().equals("textfield")
-					|| type.getName().toLowerCase().equals("textarea")) {
+			} else if (type.getSimpleName().toLowerCase().equals("string")
+					|| type.getSimpleName().toLowerCase().equals("textfield")
+					|| type.getSimpleName().toLowerCase().equals("textarea")) {
 				label.setText("StringProperty " + field.getName() + " = new SimpleStringProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(), "StringProperty " + field.getName() + " = new SimpleStringProperty()");
-			} else if (type.getName().toLowerCase().equals("double")) {
+			} else if (type.getSimpleName().toLowerCase().equals("double")) {
 				label.setText("DoubleProperty " + field.getName() + " = new SimpleDoubleProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(), "DoubleProperty " + field.getName() + " = new SimpleDoubleProperty()");
-			} else if (type.getName().toLowerCase().equals("float")) {
+			} else if (type.getSimpleName().toLowerCase().equals("float")) {
 				label.setText("FloatProperty " + field.getName() + " = new SimpleFloatProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(),"FloatProperty " + field.getName() + " = new SimpleFloatProperty()");
-			} else if (type.getName().toLowerCase().equals("boolean")
-					|| type.getName().toLowerCase().equals("checkbox")
-					|| type.getName().toLowerCase().equals("radiobutton")) {
+			} else if (type.getSimpleName().toLowerCase().equals("boolean")
+					|| type.getSimpleName().toLowerCase().equals("checkbox")
+					|| type.getSimpleName().toLowerCase().equals("radiobutton")) {
 				label.setText("BooleanProperty " + field.getName() + " = new SimpleBooleanProperty()");
 				rootNode.getHashFieldAndProperties().put(field.getName(), "BooleanProperty " + field.getName() + " = new SimpleBooleanProperty()");
 			} else {

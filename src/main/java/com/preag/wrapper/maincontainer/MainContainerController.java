@@ -59,17 +59,17 @@ public class MainContainerController implements Initializable {
 
 	@FXML
 	public void onChangeToInterface() {
-		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHANGE_TO_INTERFACE));
+		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHANGE_TO_INTERFACE, Category.INTERFACE));
 	}
 
 	@FXML
 	public void onChangeToMiniObject() {
-		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHANGE_TO_MINI_OBJECT));
+		rootNode.fireEvent(new WrapperEvent(WrapperEvent.CHANGE_TO_MINI_OBJECT, Category.MINI_OBJECT));
 	}
 
 	@FXML
 	public void onSave() {
-		rootNode.fireEvent(new WrapperEvent(WrapperEvent.SAVE, Category.MINI_OBJECT));
+		rootNode.fireEvent(new WrapperEvent(WrapperEvent.SAVE));
 	}
 
 	@FXML

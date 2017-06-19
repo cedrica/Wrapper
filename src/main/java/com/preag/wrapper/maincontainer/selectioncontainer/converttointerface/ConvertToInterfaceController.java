@@ -78,9 +78,9 @@ public class ConvertToInterfaceController implements Initializable {
 			Field[] declaredFields = clazz.getDeclaredFields();
 			for (Field field : declaredFields) {
 				Class<?> type = field.getType();
-				String setter = "public void set" + Helper.capitalizeFirstLetter(field.getName()) + "(" + type + " "
+				String setter = "void set" + Helper.capitalizeFirstLetter(field.getName()) + "(" + type.getSimpleName() + " "
 						+ field.getName() + ");";
-				String getter = "public " + type + " get" + Helper.capitalizeFirstLetter(field.getName()) + "();";
+				String getter = type.getSimpleName() + " get" + Helper.capitalizeFirstLetter(field.getName()) + "();";
 				Pair<String, String> pair = new Pair<String, String>(setter, getter);
 				value.put(field.getName(), pair);
 			}

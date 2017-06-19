@@ -27,6 +27,7 @@ public class PreviewController implements Initializable {
 						Label label = new Label(entry2.getValue().getKey());
 						rootNode.getChildren().add(label);
 						rootNode.getChildren().add(new Label(entry2.getValue().getValue()));
+						rootNode.getChildren().add(new Label("//========================================"));
 					}
 				}
 			}
